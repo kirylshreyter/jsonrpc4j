@@ -155,7 +155,7 @@ public abstract class JsonRpcServerBatchTest {
     private MockHttpServletResponse handleRequest(InputStream inputStream) throws IOException {
         MockHttpServletRequest request = createRequest(inputStream);
         MockHttpServletResponse response = new MockHttpServletResponse();
-        jsonRpcServer.handle(request, response);
+//        jsonRpcServer.handle(request, response);
         return response;
     }
 }

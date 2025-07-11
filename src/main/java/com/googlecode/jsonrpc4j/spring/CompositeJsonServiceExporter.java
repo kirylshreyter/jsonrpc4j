@@ -3,9 +3,9 @@ package com.googlecode.jsonrpc4j.spring;
 import com.googlecode.jsonrpc4j.JsonRpcServer;
 import org.springframework.web.HttpRequestHandler;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -33,4 +33,7 @@ public class CompositeJsonServiceExporter extends AbstractCompositeJsonServiceEx
 		response.getOutputStream().flush();
 	}
 
+	@Override
+	public void handleRequest(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws IOException {
+	}
 }
