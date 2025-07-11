@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -120,23 +120,6 @@ public class JsonRpcServer extends JsonRpcBasicServer {
 	 */
 	public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		handleCommon(
-			new JavaxHttpServletRequest(request),
-			new JavaxHttpServletResponse(response)
-		);
-	}
-
-	/**
-	 * Handles a servlet request.
-	 *
-	 * @param request  the {@link jakarta.servlet.http.HttpServletRequest}
-	 * @param response the {@link jakarta.servlet.http.HttpServletResponse}
-	 * @throws IOException on error
-	 */
-	public void handle(
-		jakarta.servlet.http.HttpServletRequest request,
-		jakarta.servlet.http.HttpServletResponse response
-	) throws IOException {
-		handleCommon(
 			new JakartaHttpServletRequest(request),
 			new JakartaHttpServletResponse(response)
 		);
@@ -208,40 +191,11 @@ public class JsonRpcServer extends JsonRpcBasicServer {
 		String getParameter(String name);
 	}
 
-	private static class JavaxHttpServletRequest implements CommonHttpServletRequest {
+	private static class JakartaHttpServletRequest implements CommonHttpServletRequest {
 
 		private final HttpServletRequest request;
 
-		private JavaxHttpServletRequest(HttpServletRequest request) {
-			this.request = request;
-		}
-
-		@Override
-		public Object unwrap() {
-			return this.request;
-		}
-
-		@Override
-		public InputStream getInputStream() throws IOException {
-			return this.request.getInputStream();
-		}
-
-		@Override
-		public String getMethod() {
-			return this.request.getMethod();
-		}
-
-		@Override
-		public String getParameter(String name) {
-			return this.request.getParameter(name);
-		}
-	}
-
-	private static class JakartaHttpServletRequest implements CommonHttpServletRequest {
-
-		private final jakarta.servlet.http.HttpServletRequest request;
-
-		private JakartaHttpServletRequest(jakarta.servlet.http.HttpServletRequest request) {
+		private JakartaHttpServletRequest(HttpServletRequest request) {
 			this.request = request;
 		}
 
@@ -273,40 +227,11 @@ public class JsonRpcServer extends JsonRpcBasicServer {
 		OutputStream getOutputStream() throws IOException;
 	}
 
-	private static class JavaxHttpServletResponse implements CommonHttpServletResponse {
+	private static class JakartaHttpServletResponse implements CommonHttpServletResponse {
 
 		private final HttpServletResponse response;
 
-		private JavaxHttpServletResponse(HttpServletResponse response) {
-			this.response = response;
-		}
-
-		@Override
-		public void setContentType(String type) {
-			this.response.setContentType(type);
-		}
-
-		@Override
-		public void setStatus(int sc) {
-			this.response.setStatus(sc);
-		}
-
-		@Override
-		public void setContentLength(int len) {
-			this.response.setContentLength(len);
-		}
-
-		@Override
-		public OutputStream getOutputStream() throws IOException {
-			return this.response.getOutputStream();
-		}
-	}
-
-	private static class JakartaHttpServletResponse implements CommonHttpServletResponse {
-
-		private final jakarta.servlet.http.HttpServletResponse response;
-
-		private JakartaHttpServletResponse(jakarta.servlet.http.HttpServletResponse response) {
+		private JakartaHttpServletResponse(HttpServletResponse response) {
 			this.response = response;
 		}
 

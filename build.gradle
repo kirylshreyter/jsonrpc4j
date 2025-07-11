@@ -3,9 +3,9 @@ buildscript {
     ext {
         set("jacksonVersion", "2.19.0")
         // Versions 6.0.0 and above no longer support Java 1.8
-        set("springVersion", "5.3.39")
+        set("springVersion", "6.2.8")
         // Versions 3.0.0 and above no longer support Java 1.8
-        set("springBootVersion", "2.7.18")
+        set("springBootVersion", "3.5.3")
         set("jettyVersion", "9.4.57.v20241219")
         set("slf4jVersion", "2.0.17")
     }
@@ -56,6 +56,7 @@ ext {
 }
 
 test {
+    useJUnitPlatform()
     testLogging {
         exceptionFormat 	= "FULL"
         showExceptions 		= true
@@ -100,10 +101,9 @@ dependencies {
 
     // TODO: remove deprecated portlet-api when support is removed from the code
     servletSupportImplementation 'javax.portlet:portlet-api:3.0.1'
-    servletSupportImplementation 'javax.servlet:javax.servlet-api:4.0.1'
-    // TODO: Jakarta EE 9 and jakarta.servlet-api 5.x are still compatible with Java SE 8,
-    // update jakarta.servlet-api to version 6+ when JDK baseline is increased to 11+
-    servletSupportImplementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+    // Updated to jakarta.servlet-api 6.1.0 for Spring 6.x and Spring Boot 3.x compatibility
+    // javax.servlet-api is no longer supported in Spring 6.x
+    servletSupportImplementation 'jakarta.servlet:jakarta.servlet-api:6.1.0'
 
     implementation group: 'jakarta.jws', name: 'jakarta.jws-api', version: '3.0.0'
 
@@ -119,7 +119,8 @@ dependencies {
     implementation 'commons-codec:commons-codec:1.18.0'
     implementation 'org.apache.httpcomponents:httpcore-nio:4.4.16'
 
-    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation 'org.easymock:easymock:5.5.0'
     testImplementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}") {
         exclude module: 'logback-classic'

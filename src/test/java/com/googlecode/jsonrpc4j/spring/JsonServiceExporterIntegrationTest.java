@@ -1,22 +1,22 @@
 package com.googlecode.jsonrpc4j.spring;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.googlecode.jsonrpc4j.spring.service.Service;
 import com.googlecode.jsonrpc4j.spring.service.ServiceImpl;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This test ensures that {@link com.googlecode.jsonrpc4j.spring.JsonServiceExporter} bean is
  * constructed according to Spring Framework configuration.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration("classpath:serverApplicationContextC.xml")
 public class JsonServiceExporterIntegrationTest {
 

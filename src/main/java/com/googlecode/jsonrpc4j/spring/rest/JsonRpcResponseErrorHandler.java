@@ -78,7 +78,9 @@ public class JsonRpcResponseErrorHandler
 	private HttpStatus getHttpStatusCode(ClientHttpResponse response) throws IOException {
 		final HttpStatus statusCode;
 		try {
-			statusCode = response.getStatusCode();
+			// In Spring 6.x, getStatusCode() returns HttpStatusCode, need to convert to HttpStatus
+			var httpStatusCode = response.getStatusCode();
+			statusCode = HttpStatus.valueOf(httpStatusCode.value());
 		} catch (IllegalArgumentException ex) {
 			throw new UnknownHttpStatusCodeException(response.getRawStatusCode(),
 					response.getStatusText(), response.getHeaders(), getResponseBody(response), getCharset(response));
