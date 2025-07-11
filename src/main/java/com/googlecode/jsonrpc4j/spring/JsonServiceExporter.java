@@ -3,15 +3,15 @@ package com.googlecode.jsonrpc4j.spring;
 import com.googlecode.jsonrpc4j.JsonRpcServer;
 import org.springframework.web.HttpRequestHandler;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
  * {@link HttpRequestHandler} that exports user services using JSON-RPC over HTTP protocol
  */
-public class JsonServiceExporter extends AbstractJsonServiceExporter implements HttpRequestHandler {
+public abstract class JsonServiceExporter extends AbstractJsonServiceExporter implements HttpRequestHandler {
 
 	private JsonRpcServer jsonRpcServer;
 
@@ -30,5 +30,4 @@ public class JsonServiceExporter extends AbstractJsonServiceExporter implements 
 		jsonRpcServer.handle(request, response);
 		response.getOutputStream().flush();
 	}
-
 }

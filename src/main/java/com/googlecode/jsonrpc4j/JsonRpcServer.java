@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -108,20 +108,6 @@ public class JsonRpcServer extends JsonRpcBasicServer {
 			request.getRenderParameters().getValue(METHOD),
 			request.getRenderParameters().getValue(ID),
 			request.getRenderParameters().getValue(PARAMS)
-		);
-	}
-
-	/**
-	 * Handles a servlet request.
-	 *
-	 * @param request  the {@link HttpServletRequest}
-	 * @param response the {@link HttpServletResponse}
-	 * @throws IOException on error
-	 */
-	public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		handleCommon(
-			new JavaxHttpServletRequest(request),
-			new JavaxHttpServletResponse(response)
 		);
 	}
 

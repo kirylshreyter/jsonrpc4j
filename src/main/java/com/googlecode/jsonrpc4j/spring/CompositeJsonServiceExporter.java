@@ -3,9 +3,9 @@ package com.googlecode.jsonrpc4j.spring;
 import com.googlecode.jsonrpc4j.JsonRpcServer;
 import org.springframework.web.HttpRequestHandler;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -13,7 +13,7 @@ import java.io.IOException;
  * multiple services via JSON-RPC over HTTP.
  */
 @SuppressWarnings("unused")
-public class CompositeJsonServiceExporter extends AbstractCompositeJsonServiceExporter implements HttpRequestHandler {
+public abstract class CompositeJsonServiceExporter extends AbstractCompositeJsonServiceExporter implements HttpRequestHandler {
 
 	private JsonRpcServer jsonRpcServer;
 
@@ -32,5 +32,4 @@ public class CompositeJsonServiceExporter extends AbstractCompositeJsonServiceEx
 		jsonRpcServer.handle(request, response);
 		response.getOutputStream().flush();
 	}
-
 }
